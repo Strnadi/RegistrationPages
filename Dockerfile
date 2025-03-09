@@ -1,17 +1,26 @@
-# Use the official Nginx image
-FROM nginx:alpine
+# 1. Use official Go image
+FROM golang:1.21 as builder
 
-# Copy all HTML pages to Nginx's public directory
-COPY index.html /usr/share/nginx/html/index.html
-COPY forgotten-password.html /usr/share/nginx/html/forgotten-password.html
-COPY 404.html /usr/share/nginx/html/404.html
+# 2. Set working directory
+WORKDIR /app
 
-# Copy the custom Nginx configuration
-COPY nginx.conf /etc/nginx/nginx.conf
+# 3. Copy Go code and static HTML files
+COPY . .
 
-# Expose port 80 for HTTP
-EXPOSE 80
+# 4. Build the Go app
+RUN go build -o server
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# 5. Use a minimal final image
+FROM debian:bookworm-slim
+
+# 6. Set working dir in final image
+WORKDIR /app
+
+# 7. Copy built Go binary and HTML files
+COPY --from=builder /app/server /app/
+COPY --from=builder /app/src /app/src
+
+# 8. Set port and command
+EXPOSE 3000
+CMD ["./server"]
 
