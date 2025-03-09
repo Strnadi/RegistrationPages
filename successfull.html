@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Success</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes pop {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .animate-pop {
+      animation: pop 0.4s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-100 to-purple-200 flex items-center justify-center min-h-screen">
+
+  <div class="bg-white p-10 rounded-3xl shadow-xl text-center max-w-md w-full animate-pop">
+    <div class="flex justify-center mb-6">
+      <div class="bg-green-100 text-green-600 rounded-full p-4">
+        <!-- Checkmark icon -->
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2"
+             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+    </div>
+
+    <h1 class="text-2xl font-bold text-gray-800 mb-2">Success!</h1>
+    <p class="text-gray-600 mb-6">You have been registered seccussfully! 🎉</p>
+
+    <p 
+       class="inline-block bg-blue-600 text-white font-medium px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+      You can now go back to your app 
+    </p>
+  </div>
+
+</body>
+</html>
+
